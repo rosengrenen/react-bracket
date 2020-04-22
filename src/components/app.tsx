@@ -1,4 +1,5 @@
 import React from 'react';
+import Bracket from './bracket';
 
 interface Match {
 	id: string;
@@ -198,9 +199,10 @@ teams.forEach(team => {
 	teamsMap.set(team.id, team);
 });
 
+const bracket = treeFromFlat(matchesMap, teamsMap);
+
 function App() {
-	console.log(treeFromFlat(matchesMap, teamsMap));
-	return <div className="App">A</div>;
+	return <Bracket bracket={bracket} />;
 }
 
 export default App;
