@@ -3,117 +3,117 @@ import Bracket from './bracket';
 
 interface Match {
 	id: string;
-	leftParentId: string | null;
-	rightParentId: string | null;
-	leftTeamId: string | null;
-	rightTeamId: string | null;
+	lowerParentId: string | null;
+	upperParentId: string | null;
+	lowerTeamId: string | null;
+	upperTeamId: string | null;
 }
 
 const matches: Match[] = [
 	{
 		id: '-1',
-		leftParentId: null,
-		rightParentId: null,
-		leftTeamId: '6',
-		rightTeamId: '4',
+		lowerParentId: null,
+		upperParentId: null,
+		lowerTeamId: '6',
+		upperTeamId: '4',
 	},
 	{
 		id: '0',
-		leftParentId: '-1',
-		rightParentId: null,
-		leftTeamId: '0',
-		rightTeamId: '1',
+		lowerParentId: '-1',
+		upperParentId: null,
+		lowerTeamId: '0',
+		upperTeamId: '1',
 	},
 	{
 		id: '1',
-		leftParentId: null,
-		rightParentId: null,
-		leftTeamId: '2',
-		rightTeamId: '3',
+		lowerParentId: null,
+		upperParentId: null,
+		lowerTeamId: '2',
+		upperTeamId: '3',
 	},
 	{
 		id: '2',
-		leftParentId: '10',
-		rightParentId: '100',
-		leftTeamId: '4',
-		rightTeamId: '5',
+		lowerParentId: '10',
+		upperParentId: '100',
+		lowerTeamId: '4',
+		upperTeamId: '5',
 	},
 	{
 		id: '3',
-		leftParentId: null,
-		rightParentId: null,
-		leftTeamId: '6',
-		rightTeamId: '7',
+		lowerParentId: null,
+		upperParentId: null,
+		lowerTeamId: '6',
+		upperTeamId: '7',
 	},
 	{
 		id: '4',
-		leftParentId: '1',
-		rightParentId: '0',
-		leftTeamId: null,
-		rightTeamId: null,
+		lowerParentId: '1',
+		upperParentId: '0',
+		lowerTeamId: null,
+		upperTeamId: null,
 	},
 	{
 		id: '5',
-		leftParentId: '3',
-		rightParentId: '2',
-		leftTeamId: null,
-		rightTeamId: null,
+		lowerParentId: '3',
+		upperParentId: '2',
+		lowerTeamId: null,
+		upperTeamId: null,
 	},
 	{
 		id: '6',
-		leftParentId: '5',
-		rightParentId: '4',
-		leftTeamId: null,
-		rightTeamId: null,
+		lowerParentId: '5',
+		upperParentId: '4',
+		lowerTeamId: null,
+		upperTeamId: null,
 	},
 	{
 		id: '10',
-		leftParentId: null,
-		rightParentId: null,
-		leftTeamId: '4',
-		rightTeamId: '5',
+		lowerParentId: null,
+		upperParentId: null,
+		lowerTeamId: '4',
+		upperTeamId: '5',
 	},
 	{
 		id: '100',
-		leftParentId: null,
-		rightParentId: '1000',
-		leftTeamId: '4',
-		rightTeamId: '5',
+		lowerParentId: null,
+		upperParentId: '1000',
+		lowerTeamId: '4',
+		upperTeamId: '5',
 	},
 	{
 		id: '1000',
-		leftParentId: '10000',
-		rightParentId: '100000',
-		leftTeamId: '4',
-		rightTeamId: '5',
+		lowerParentId: '10000',
+		upperParentId: '100000',
+		lowerTeamId: '4',
+		upperTeamId: '5',
 	},
 	{
 		id: '10000',
-		leftParentId: null,
-		rightParentId: null,
-		leftTeamId: '4',
-		rightTeamId: '5',
+		lowerParentId: null,
+		upperParentId: null,
+		lowerTeamId: '4',
+		upperTeamId: '5',
 	},
 	{
 		id: '100000',
-		leftParentId: '1000000',
-		rightParentId: '99',
-		leftTeamId: '4',
-		rightTeamId: '5',
+		lowerParentId: '1000000',
+		upperParentId: '99',
+		lowerTeamId: '4',
+		upperTeamId: '5',
 	},
 	{
 		id: '1000000',
-		leftParentId: null,
-		rightParentId: null,
-		leftTeamId: '4',
-		rightTeamId: '5',
+		lowerParentId: null,
+		upperParentId: null,
+		lowerTeamId: '4',
+		upperTeamId: '5',
 	},
 	{
 		id: '99',
-		leftParentId: null,
-		rightParentId: null,
-		leftTeamId: '4',
-		rightTeamId: '5',
+		lowerParentId: null,
+		upperParentId: null,
+		lowerTeamId: '4',
+		upperTeamId: '5',
 	},
 ];
 
@@ -159,10 +159,10 @@ const teams: Team[] = [
 
 interface BracketMatch {
 	id: string;
-	leftParent: BracketMatch | null;
-	rightParent: BracketMatch | null;
-	leftTeam: Team | null;
-	rightTeam: Team | null;
+	lowerParent: BracketMatch | null;
+	upperParent: BracketMatch | null;
+	lowerTeam: Team | null;
+	upperTeam: Team | null;
 	width: number;
 }
 
@@ -171,61 +171,61 @@ function buildTree(
 	matches: Map<string, Match>,
 	teams: Map<string, Team>,
 ): BracketMatch {
-	let leftTeam: Team | null;
-	if (currentMatch.leftTeamId !== null) {
-		leftTeam = teams.get(currentMatch.leftTeamId) || null;
+	let lowerTeam: Team | null;
+	if (currentMatch.lowerTeamId !== null) {
+		lowerTeam = teams.get(currentMatch.lowerTeamId) || null;
 	} else {
-		leftTeam = null;
+		lowerTeam = null;
 	}
 
-	let rightTeam: Team | null;
-	if (currentMatch.rightTeamId !== null) {
-		rightTeam = teams.get(currentMatch.rightTeamId) || null;
+	let upperTeam: Team | null;
+	if (currentMatch.upperTeamId !== null) {
+		upperTeam = teams.get(currentMatch.upperTeamId) || null;
 	} else {
-		rightTeam = null;
+		upperTeam = null;
 	}
 
-	let leftParent: BracketMatch | null;
-	if (currentMatch.leftParentId) {
-		const match = matches.get(currentMatch.leftParentId);
+	let lowerParent: BracketMatch | null;
+	if (currentMatch.lowerParentId) {
+		const match = matches.get(currentMatch.lowerParentId);
 		if (!match) {
 			throw new Error('Could not find match');
 		}
 
-		leftParent = buildTree(match, matches, teams);
+		lowerParent = buildTree(match, matches, teams);
 	} else {
-		leftParent = null;
+		lowerParent = null;
 	}
 
-	let rightParent: BracketMatch | null;
-	if (currentMatch.rightParentId) {
-		const match = matches.get(currentMatch.rightParentId);
+	let upperParent: BracketMatch | null;
+	if (currentMatch.upperParentId) {
+		const match = matches.get(currentMatch.upperParentId);
 		if (!match) {
 			throw new Error('Could not find match');
 		}
 
-		rightParent = buildTree(match, matches, teams);
+		upperParent = buildTree(match, matches, teams);
 	} else {
-		rightParent = null;
+		upperParent = null;
 	}
 
 	let width: number;
-	if (rightParent && leftParent) {
-		width = rightParent.width + leftParent.width;
-	} else if (rightParent) {
-		width = rightParent.width;
-	} else if (leftParent) {
-		width = leftParent.width;
+	if (upperParent && lowerParent) {
+		width = upperParent.width + lowerParent.width;
+	} else if (upperParent) {
+		width = upperParent.width;
+	} else if (lowerParent) {
+		width = lowerParent.width;
 	} else {
 		width = 1;
 	}
 
 	return {
 		id: currentMatch.id,
-		leftTeam,
-		rightTeam,
-		leftParent,
-		rightParent,
+		lowerTeam,
+		upperTeam,
+		lowerParent,
+		upperParent,
 		width,
 	};
 }
@@ -237,12 +237,12 @@ function treeFromFlat(matches: Map<string, Match>, teams: Map<string, Team>): Br
 	});
 
 	matches.forEach(match => {
-		if (match.leftParentId !== null) {
-			independent.delete(match.leftParentId);
+		if (match.lowerParentId !== null) {
+			independent.delete(match.lowerParentId);
 		}
 
-		if (match.rightParentId !== null) {
-			independent.delete(match.rightParentId);
+		if (match.upperParentId !== null) {
+			independent.delete(match.upperParentId);
 		}
 	});
 

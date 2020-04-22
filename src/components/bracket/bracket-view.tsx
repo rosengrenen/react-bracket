@@ -19,10 +19,10 @@ interface Team {
 
 interface BracketMatch {
 	id: string;
-	leftParent: BracketMatch | null;
-	rightParent: BracketMatch | null;
-	leftTeam: Team | null;
-	rightTeam: Team | null;
+	lowerParent: BracketMatch | null;
+	upperParent: BracketMatch | null;
+	lowerTeam: Team | null;
+	upperTeam: Team | null;
 	width: number;
 }
 
@@ -34,40 +34,40 @@ interface InternalBracketProps {
 const InternalBracket: React.FC<InternalBracketProps> = ({ bracket, first = false }) => {
 	let marginTop = 0;
 	let marginBottom = 0;
-	if (bracket.leftParent && bracket.rightParent) {
-		const leftWidth = bracket.leftParent.width;
-		const rightWidth = bracket.rightParent.width;
-		const totalWidth = leftWidth + rightWidth;
+	if (bracket.lowerParent && bracket.upperParent) {
+		const upperWidth = bracket.upperParent.width;
+		const totalWidth = bracket.lowerParent.width + upperWidth;
 
-		const rightMiddle = (rightWidth / 2 / totalWidth) * 100;
+		const upperMiddle = (upperWidth / 2 / totalWidth) * 100;
 
-		if (rightMiddle > 25) {
-			marginTop = rightMiddle - 25;
-		} else if (rightMiddle < 25) {
-			marginBottom = 25 - rightMiddle;
+		if (upperMiddle > 25) {
+			marginTop = 2 * (upperMiddle - 25);
+		} else if (upperMiddle < 25) {
+			marginBottom = 2 * (25 - upperMiddle);
 		}
 	}
+
 	return (
 		<BracketWrapper>
-			{(bracket.rightParent || bracket.leftParent) && (
+			{(bracket.upperParent || bracket.lowerParent) && (
 				<BracketChildWrapper>
-					{bracket.rightParent && <InternalBracket bracket={bracket.rightParent} />}
-					{bracket.leftParent && <InternalBracket bracket={bracket.leftParent} />}
+					{bracket.upperParent && <InternalBracket bracket={bracket.upperParent} />}
+					{bracket.lowerParent && <InternalBracket bracket={bracket.lowerParent} />}
 				</BracketChildWrapper>
 			)}
 			<BracketContentWrapper>
-				{bracket.rightParent && bracket.leftParent && (
-					<BracketVerticalConnectorWrapper margin={2 * (marginTop + marginBottom)}>
+				{bracket.upperParent && bracket.lowerParent && (
+					<BracketVerticalConnectorWrapper margin={marginTop + marginBottom}>
 						{marginBottom > marginTop && <BracketVerticalConnectorFilled />}
-						<BracketVerticalConnectorEmpty margin={2 * (marginTop + marginBottom)} />
+						<BracketVerticalConnectorEmpty margin={marginTop + marginBottom} />
 						{marginBottom <= marginTop && <BracketVerticalConnectorFilled />}
 					</BracketVerticalConnectorWrapper>
 				)}
-				{(bracket.rightParent || bracket.leftParent) && <BracketHorizontalConnector />}
+				{(bracket.upperParent || bracket.lowerParent) && <BracketHorizontalConnector />}
 				<BracketContentCardWrapper>
 					<BracketContentCard>
-						<div>{bracket.rightTeam ? bracket.rightTeam.name : 'TBD'}</div>
-						<div>{bracket.leftTeam ? bracket.leftTeam.name : 'TBD'}</div>
+						<div>{bracket.upperTeam ? bracket.upperTeam.name : 'TBD'}</div>
+						<div>{bracket.lowerTeam ? bracket.lowerTeam.name : 'TBD'}</div>
 					</BracketContentCard>
 				</BracketContentCardWrapper>
 				{!first && <BracketHorizontalConnector />}
