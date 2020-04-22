@@ -1,4 +1,16 @@
 import React from 'react';
+import {
+	BracketWrapper,
+	BracketChildWrapper,
+	BracketContentWrapper,
+	BracketHorizontalConnector,
+	BracketVerticalConnectorWrapper,
+	BracketVerticalConnectorFilled,
+	BracketVerticalConnectorEmpty,
+	BracketContentCardWrapper,
+	BracketContentCard,
+	BracketFlexWrapper,
+} from './bracket-styles';
 
 interface Team {
 	id: string;
@@ -14,19 +26,12 @@ interface BracketMatch {
 	width: number;
 }
 
-interface Props {
+interface InternalBracketProps {
 	bracket: BracketMatch;
 	first?: boolean;
 }
 
-const Bracket: React.FC<Props> = ({ bracket, first = false }) => {
-	let count = 0;
-	if (bracket.leftParent) {
-		count++;
-	}
-	if (bracket.rightParent) {
-		count++;
-	}
+const InternalBracket: React.FC<InternalBracketProps> = ({ bracket, first = false }) => {
 	let marginTop = 0;
 	let marginBottom = 0;
 	if (bracket.leftParent && bracket.rightParent) {
@@ -43,85 +48,46 @@ const Bracket: React.FC<Props> = ({ bracket, first = false }) => {
 		}
 	}
 	return (
-		<div
-			style={{ display: 'flex', flexGrow: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
-			id={bracket.id}
-		>
+		<BracketWrapper>
 			{(bracket.rightParent || bracket.leftParent) && (
-				<div
-					style={{
-						// background: 'rgba(0, 0, 255, 0.5)',
-						flexGrow: 1,
-						display: 'flex',
-						flexDirection: 'column',
-					}}
-				>
-					{bracket.rightParent && <Bracket bracket={bracket.rightParent} />}
-					{bracket.leftParent && <Bracket bracket={bracket.leftParent} />}
-				</div>
+				<BracketChildWrapper>
+					{bracket.rightParent && <InternalBracket bracket={bracket.rightParent} />}
+					{bracket.leftParent && <InternalBracket bracket={bracket.leftParent} />}
+				</BracketChildWrapper>
 			)}
-			<div
-				style={{
-					// background: 'rgba(255, 0, 0, 0.5)',
-					flexShrink: 0,
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					// padding: '10px 0',
-				}}
-			>
-				{count === 2 && (
-					<div
-						style={{
-							height: `calc(50% + ${marginBottom * 2 + marginTop * 2}% + 2px)`,
-							display: 'flex',
-							flexDirection: 'column',
-						}}
-					>
-						{marginBottom > marginTop && (
-							<div style={{ width: '2px', flexGrow: 1, background: 'black' }} />
-						)}
-						<div
-							style={{
-								width: '2px',
-								flexBasis: `calc(${
-									((2 * (marginBottom + marginTop)) / (2 * (marginBottom + marginTop) + 50)) * 100
-								}% - 1px)`,
-								flexShrink: 0,
-							}}
-						/>
-						{marginBottom <= marginTop && (
-							<div style={{ width: '2px', flexGrow: 1, background: 'black' }} />
-						)}
-					</div>
+			<BracketContentWrapper>
+				{bracket.rightParent && bracket.leftParent && (
+					<BracketVerticalConnectorWrapper margin={2 * (marginTop + marginBottom)}>
+						{marginBottom > marginTop && <BracketVerticalConnectorFilled />}
+						<BracketVerticalConnectorEmpty margin={2 * (marginTop + marginBottom)} />
+						{marginBottom <= marginTop && <BracketVerticalConnectorFilled />}
+					</BracketVerticalConnectorWrapper>
 				)}
-				{count >= 1 && <div style={{ width: '20px', height: '2px', background: 'black' }} />}
-				<div style={{ width: '200px', padding: '10px 0 ' }}>
-					<div style={{ background: 'cyan', border: '2px solid black' }}>
+				{(bracket.rightParent || bracket.leftParent) && <BracketHorizontalConnector />}
+				<BracketContentCardWrapper>
+					<BracketContentCard>
 						<div>{bracket.rightTeam ? bracket.rightTeam.name : 'TBD'}</div>
 						<div>{bracket.leftTeam ? bracket.leftTeam.name : 'TBD'}</div>
-					</div>
-				</div>
-				{!first && <div style={{ width: '20px', height: '2px', background: 'black' }} />}
-			</div>
-		</div>
+					</BracketContentCard>
+				</BracketContentCardWrapper>
+				{!first && <BracketHorizontalConnector />}
+			</BracketContentWrapper>
+		</BracketWrapper>
 	);
 };
 
-const BrackerWrapper: React.FC<Props> = props => {
-	console.log(props);
+interface BracketProps {
+	bracket: BracketMatch;
+}
+
+const Bracket: React.FC<BracketProps> = props => {
 	return (
-		<div style={{ display: 'flex' }}>
-			<div
-				style={{
-					// background: 'green',
-					display: 'flex',
-				}}
-			>
-				<Bracket first {...props} />
-			</div>
-		</div>
+		<BracketFlexWrapper>
+			<BracketFlexWrapper>
+				<InternalBracket first {...props} />
+			</BracketFlexWrapper>
+		</BracketFlexWrapper>
 	);
 };
 
-export default BrackerWrapper;
+export default Bracket;
