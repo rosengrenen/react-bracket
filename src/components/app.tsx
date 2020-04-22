@@ -7,113 +7,161 @@ interface Match {
 	upperParentId: string | null;
 	lowerTeamId: string | null;
 	upperTeamId: string | null;
+	lowerTeamScore: number | null;
+	upperTeamScore: number | null;
+	winner: 'upper' | 'lower' | null;
 }
 
 const matches: Match[] = [
 	{
-		id: '-1',
-		lowerParentId: null,
-		upperParentId: null,
-		lowerTeamId: '6',
-		upperTeamId: '4',
-	},
-	{
 		id: '0',
-		lowerParentId: '-1',
+		lowerParentId: null,
 		upperParentId: null,
 		lowerTeamId: '0',
 		upperTeamId: '1',
+		lowerTeamScore: 0,
+		upperTeamScore: 1,
+		winner: 'upper',
 	},
 	{
 		id: '1',
-		lowerParentId: null,
-		upperParentId: null,
-		lowerTeamId: '2',
-		upperTeamId: '3',
+		lowerParentId: '4',
+		upperParentId: '2',
+		lowerTeamId: null,
+		upperTeamId: null,
+		lowerTeamScore: null,
+		upperTeamScore: null,
+		winner: null,
 	},
 	{
 		id: '2',
-		lowerParentId: '10',
-		upperParentId: '100',
-		lowerTeamId: '4',
-		upperTeamId: '5',
+		lowerParentId: null,
+		upperParentId: '3',
+		lowerTeamId: '12',
+		upperTeamId: '14',
+		lowerTeamScore: 2,
+		upperTeamScore: 1,
+		winner: null,
 	},
 	{
 		id: '3',
 		lowerParentId: null,
 		upperParentId: null,
-		lowerTeamId: '6',
-		upperTeamId: '7',
+		lowerTeamId: '12',
+		upperTeamId: '13',
+		lowerTeamScore: 27,
+		upperTeamScore: 5,
+		winner: 'lower',
 	},
 	{
 		id: '4',
-		lowerParentId: '1',
-		upperParentId: '0',
+		lowerParentId: '14',
+		upperParentId: '5',
 		lowerTeamId: null,
 		upperTeamId: null,
+		lowerTeamScore: null,
+		upperTeamScore: null,
+		winner: null,
 	},
 	{
 		id: '5',
-		lowerParentId: '3',
-		upperParentId: '2',
-		lowerTeamId: null,
-		upperTeamId: null,
+		lowerParentId: '6',
+		upperParentId: '7',
+		lowerTeamId: '10',
+		upperTeamId: '8',
+		lowerTeamScore: 4,
+		upperTeamScore: 1,
+		winner: 'lower',
 	},
 	{
 		id: '6',
-		lowerParentId: '5',
-		upperParentId: '4',
-		lowerTeamId: null,
-		upperTeamId: null,
+		lowerParentId: null,
+		upperParentId: null,
+		lowerTeamId: '10',
+		upperTeamId: '11',
+		lowerTeamScore: 7,
+		upperTeamScore: 3,
+		winner: 'lower',
+	},
+	{
+		id: '7',
+		lowerParentId: null,
+		upperParentId: '8',
+		lowerTeamId: '8',
+		upperTeamId: '10',
+		lowerTeamScore: 1,
+		upperTeamScore: 0,
+		winner: 'lower',
+	},
+	{
+		id: '8',
+		lowerParentId: null,
+		upperParentId: null,
+		lowerTeamId: '8',
+		upperTeamId: '9',
+		lowerTeamScore: 2,
+		upperTeamScore: 1,
+		winner: 'lower',
+	},
+	{
+		id: '9',
+		lowerParentId: '0',
+		upperParentId: null,
+		lowerTeamId: '2',
+		upperTeamId: '1',
+		lowerTeamScore: 2,
+		upperTeamScore: 0,
+		winner: 'lower',
 	},
 	{
 		id: '10',
 		lowerParentId: null,
 		upperParentId: null,
-		lowerTeamId: '4',
-		upperTeamId: '5',
+		lowerTeamId: '3',
+		upperTeamId: '4',
+		lowerTeamScore: 1,
+		upperTeamScore: 2,
+		winner: 'upper',
 	},
 	{
-		id: '100',
-		lowerParentId: null,
-		upperParentId: '1000',
+		id: '11',
+		lowerParentId: '10',
+		upperParentId: '9',
 		lowerTeamId: '4',
-		upperTeamId: '5',
+		upperTeamId: '2',
+		lowerTeamScore: 3,
+		upperTeamScore: 0,
+		winner: 'lower',
 	},
 	{
-		id: '1000',
-		lowerParentId: '10000',
-		upperParentId: '100000',
-		lowerTeamId: '4',
-		upperTeamId: '5',
-	},
-	{
-		id: '10000',
-		lowerParentId: null,
+		id: '12',
+		lowerParentId: '11',
 		upperParentId: null,
 		lowerTeamId: '4',
 		upperTeamId: '5',
+		lowerTeamScore: 2,
+		upperTeamScore: 2,
+		winner: null,
 	},
 	{
-		id: '100000',
-		lowerParentId: '1000000',
-		upperParentId: '99',
-		lowerTeamId: '4',
-		upperTeamId: '5',
-	},
-	{
-		id: '1000000',
+		id: '13',
 		lowerParentId: null,
 		upperParentId: null,
-		lowerTeamId: '4',
-		upperTeamId: '5',
+		lowerTeamId: '6',
+		upperTeamId: '7',
+		lowerTeamScore: 1,
+		upperTeamScore: 0,
+		winner: 'lower',
 	},
 	{
-		id: '99',
-		lowerParentId: null,
-		upperParentId: null,
-		lowerTeamId: '4',
-		upperTeamId: '5',
+		id: '14',
+		lowerParentId: '13',
+		upperParentId: '12',
+		lowerTeamId: null,
+		upperTeamId: null,
+		lowerTeamScore: null,
+		upperTeamScore: null,
+		winner: null,
 	},
 ];
 
@@ -125,35 +173,63 @@ interface Team {
 const teams: Team[] = [
 	{
 		id: '0',
-		name: 'Team 0',
+		name: 'Team Project',
 	},
 	{
 		id: '1',
-		name: 'Team 1',
+		name: 'Team Agile Kidz',
 	},
 	{
 		id: '2',
-		name: 'Team 2',
+		name: 'Team Omega',
 	},
 	{
 		id: '3',
-		name: 'Team 3',
+		name: 'Team Lmao',
 	},
 	{
 		id: '4',
-		name: 'Team 4',
+		name: 'Team Mega',
 	},
 	{
 		id: '5',
-		name: 'Team 5',
+		name: 'Team Cnonq',
 	},
 	{
 		id: '6',
-		name: 'Team 6',
+		name: 'Team Kek',
 	},
 	{
 		id: '7',
-		name: 'Team 7',
+		name: 'Team Lul',
+	},
+	{
+		id: '8',
+		name: 'Team A',
+	},
+	{
+		id: '9',
+		name: 'Team B',
+	},
+	{
+		id: '10',
+		name: 'Team C',
+	},
+	{
+		id: '11',
+		name: 'Team D',
+	},
+	{
+		id: '12',
+		name: 'Team Epicett',
+	},
+	{
+		id: '13',
+		name: 'Team Epictvå',
+	},
+	{
+		id: '14',
+		name: 'Team Epictree',
 	},
 ];
 
@@ -163,6 +239,9 @@ interface BracketMatch {
 	upperParent: BracketMatch | null;
 	lowerTeam: Team | null;
 	upperTeam: Team | null;
+	lowerTeamScore: number | null;
+	upperTeamScore: number | null;
+	winner: 'upper' | 'lower' | null;
 	width: number;
 }
 
@@ -226,6 +305,9 @@ function buildTree(
 		upperTeam,
 		lowerParent,
 		upperParent,
+		lowerTeamScore: currentMatch.lowerTeamScore,
+		upperTeamScore: currentMatch.upperTeamScore,
+		winner: currentMatch.winner,
 		width,
 	};
 }

@@ -11,6 +11,7 @@ import {
 	BracketContentCard,
 	BracketFlexWrapper,
 } from './bracket-styles';
+import ScoreCard from './score-card';
 
 interface Team {
 	id: string;
@@ -23,6 +24,9 @@ interface BracketMatch {
 	upperParent: BracketMatch | null;
 	lowerTeam: Team | null;
 	upperTeam: Team | null;
+	lowerTeamScore: number | null;
+	upperTeamScore: number | null;
+	winner: 'upper' | 'lower' | null;
 	width: number;
 }
 
@@ -66,8 +70,16 @@ const InternalBracket: React.FC<InternalBracketProps> = ({ bracket, first = fals
 				{(bracket.upperParent || bracket.lowerParent) && <BracketHorizontalConnector />}
 				<BracketContentCardWrapper>
 					<BracketContentCard>
-						<div>{bracket.upperTeam ? bracket.upperTeam.name : 'TBD'}</div>
-						<div>{bracket.lowerTeam ? bracket.lowerTeam.name : 'TBD'}</div>
+						<ScoreCard
+							score={bracket.upperTeamScore}
+							team={bracket.upperTeam}
+							winner={bracket.winner === 'upper'}
+						/>
+						<ScoreCard
+							score={bracket.lowerTeamScore}
+							team={bracket.lowerTeam}
+							winner={bracket.winner === 'lower'}
+						/>
 					</BracketContentCard>
 				</BracketContentCardWrapper>
 				{!first && <BracketHorizontalConnector />}
