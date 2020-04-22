@@ -36,18 +36,20 @@ const Bracket: React.FC<Props> = ({ bracket }) => {
 			<div
 				style={{
 					background: 'rgba(255, 0, 0, 0.5)',
-					width: '200px',
 					flexShrink: 0,
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
-					padding: '10px',
+					padding: '10px 0',
 				}}
 			>
-				<div style={{ width: '180px', background: 'cyan', border: '2px solid black' }}>
+				<div style={{ width: '2px', height: 'calc(50% + 12px)', background: 'black' }} />
+				<div style={{ width: '20px', height: '2px', background: 'black' }} />
+				<div style={{ width: '200px', background: 'cyan', border: '2px solid black' }}>
 					<div>{bracket.rightTeam ? bracket.rightTeam.name : 'TBD'}</div>
 					<div>{bracket.leftTeam ? bracket.leftTeam.name : 'TBD'}</div>
 				</div>
+				<div style={{ width: '20px', height: '2px', background: 'black' }} />
 			</div>
 		</div>
 	);

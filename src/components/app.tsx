@@ -11,8 +11,15 @@ interface Match {
 
 const matches: Match[] = [
 	{
-		id: '0',
+		id: '-1',
 		leftParentId: null,
+		rightParentId: null,
+		leftTeamId: '6',
+		rightTeamId: '4',
+	},
+	{
+		id: '0',
+		leftParentId: '-1',
 		rightParentId: null,
 		leftTeamId: '0',
 		rightTeamId: '1',
@@ -26,8 +33,8 @@ const matches: Match[] = [
 	},
 	{
 		id: '2',
-		leftParentId: null,
-		rightParentId: null,
+		leftParentId: '10',
+		rightParentId: '100',
 		leftTeamId: '4',
 		rightTeamId: '5',
 	},
@@ -58,6 +65,27 @@ const matches: Match[] = [
 		rightParentId: '4',
 		leftTeamId: null,
 		rightTeamId: null,
+	},
+	{
+		id: '10',
+		leftParentId: null,
+		rightParentId: null,
+		leftTeamId: '4',
+		rightTeamId: '5',
+	},
+	{
+		id: '100',
+		leftParentId: null,
+		rightParentId: '1000',
+		leftTeamId: '4',
+		rightTeamId: '5',
+	},
+	{
+		id: '1000',
+		leftParentId: null,
+		rightParentId: null,
+		leftTeamId: '4',
+		rightTeamId: '5',
 	},
 ];
 
