@@ -1,16 +1,6 @@
 import React from 'react';
 import { ScoreCardContent } from './score-card-styles';
-
-interface Team {
-	id: string;
-	name: string;
-}
-
-interface Match {
-	team: Team | null;
-	teamScore: number | null;
-	winner: boolean | null;
-}
+import { Team } from '../../../utils/common-types';
 
 interface Props {
 	team: Team | null;

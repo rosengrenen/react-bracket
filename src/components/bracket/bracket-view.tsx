@@ -12,23 +12,7 @@ import {
 	BracketFlexWrapper,
 } from './bracket-styles';
 import ScoreCard from './score-card';
-
-interface Team {
-	id: string;
-	name: string;
-}
-
-interface BracketMatch {
-	id: string;
-	lowerParent: BracketMatch | null;
-	upperParent: BracketMatch | null;
-	lowerTeam: Team | null;
-	upperTeam: Team | null;
-	lowerTeamScore: number | null;
-	upperTeamScore: number | null;
-	winner: 'upper' | 'lower' | null;
-	width: number;
-}
+import { BracketMatch } from '../../utils/common-types';
 
 interface InternalBracketProps {
 	bracket: BracketMatch;
