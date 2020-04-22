@@ -82,6 +82,34 @@ const matches: Match[] = [
 	},
 	{
 		id: '1000',
+		leftParentId: '10000',
+		rightParentId: '100000',
+		leftTeamId: '4',
+		rightTeamId: '5',
+	},
+	{
+		id: '10000',
+		leftParentId: null,
+		rightParentId: null,
+		leftTeamId: '4',
+		rightTeamId: '5',
+	},
+	{
+		id: '100000',
+		leftParentId: '1000000',
+		rightParentId: '99',
+		leftTeamId: '4',
+		rightTeamId: '5',
+	},
+	{
+		id: '1000000',
+		leftParentId: null,
+		rightParentId: null,
+		leftTeamId: '4',
+		rightTeamId: '5',
+	},
+	{
+		id: '99',
 		leftParentId: null,
 		rightParentId: null,
 		leftTeamId: '4',
@@ -135,6 +163,7 @@ interface BracketMatch {
 	rightParent: BracketMatch | null;
 	leftTeam: Team | null;
 	rightTeam: Team | null;
+	width: number;
 }
 
 function buildTree(
@@ -180,12 +209,24 @@ function buildTree(
 		rightParent = null;
 	}
 
+	let width: number;
+	if (rightParent && leftParent) {
+		width = rightParent.width + leftParent.width;
+	} else if (rightParent) {
+		width = rightParent.width;
+	} else if (leftParent) {
+		width = leftParent.width;
+	} else {
+		width = 1;
+	}
+
 	return {
 		id: currentMatch.id,
 		leftTeam,
 		rightTeam,
 		leftParent,
 		rightParent,
+		width,
 	};
 }
 
