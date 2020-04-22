@@ -19,7 +19,10 @@ interface Props {
 
 const Bracket: React.FC<Props> = ({ bracket }) => {
 	return (
-		<div style={{ display: 'flex', flexGrow: 1, flexDirection: 'row' }}>
+		<div
+			style={{ display: 'flex', flexGrow: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
+			id={bracket.id}
+		>
 			{(bracket.rightParent || bracket.leftParent) && (
 				<div
 					style={{
@@ -56,6 +59,7 @@ const Bracket: React.FC<Props> = ({ bracket }) => {
 };
 
 const BrackerWrapper: React.FC<Props> = props => {
+	console.log(props);
 	return (
 		<div style={{ display: 'flex' }}>
 			<div style={{ background: 'green', display: 'flex' }}>
